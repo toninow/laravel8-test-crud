@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -26,27 +27,18 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store()
+    public function store(ProductRequest $request)
     {
-        $rules = [
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price' => ['required', 'min:1'],
-            'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in:available,unavailable'],
-        ];
-
-        request()->validate($rules);
-
-        if (request()->status == 'available' && request()->stock == 0)
+        if ($request->status == 'available' && $request->stock == 0)
         {
             return redirect()
                 ->back()
-                ->withInput(request()->all())
+                ->withInput($request->all())
                 ->withErrors('Si esta disponible debe tener stock');
         }
 
-        $product = Product::Create(request()->all());
+        $product = Product::Create($request->validated());
+
         return redirect()
             ->route('products.index')
             ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido creado");
@@ -66,28 +58,18 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $rules = [
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price' => ['required', 'min:1'],
-            'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in:available,unavailable'],
-        ];
-
-        request()->validate($rules);
-
-        if (request()->status == 'available' && request()->stock == 0)
+        if ($request->status == 'available' && $request->stock == 0)
         {
             session()->flash('error', 'Si esta disponible debe tener stock');
             return redirect()
                 ->back()
-                ->withInput(request()->all())
+                ->withInput($request->all())
                 ->withErrors('Si esta disponible debe tener stock');
         }
 
-        $product->update(request()->all());
+        $product->update($request->all());
         return redirect()->route('products.index')
         ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido editado");
     }

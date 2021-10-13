@@ -17,9 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('main');
 
-
-//improve route
+//improve route with ProductController
 Route::resource('products', 'ProductController');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::get('products', 'ProductController@index')->name('products.index');
 
@@ -35,6 +38,4 @@ Route::resource('products', 'ProductController');
 
 // Route::delete( 'products/{product}', 'ProductController@destroy')->name('products.destroy');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
