@@ -8,7 +8,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return 'LISTA DE PRODUCTOS DESDE EL CONTROLADOR';
+        return view ('products.index');
     }
 
     public function store()
@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function show($product)
     {
-        return "MOSTRANDO PRODUCTO CON ID {$product}";
+        return view ('products.show');
     }
 
     public function edit($product)
