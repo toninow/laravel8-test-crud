@@ -25,8 +25,7 @@ class ProductController extends Controller
     public function store()
     {
         $product = Product::Create(request()->all());
-
-        return $product;
+        return redirect();
     }
 
     public function show($product)
@@ -53,6 +52,8 @@ class ProductController extends Controller
 
     public function destroy($product)
     {
-        //
+        $product = Product::findOrFail($product);
+        $product->delete();
+        return $product;
     }
 }
