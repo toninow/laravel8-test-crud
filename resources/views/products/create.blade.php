@@ -8,6 +8,10 @@
         <input class="form-control" type="text" name="title" value="{{ old('title') }}">
     </div>
     <div class="form-row">
+        <label for="">Imagen</label>
+        <input type="file" name="image" class="form-control">
+    </div>
+    <div class="form-row">
         <label for="">Descripcion</label>
         <input class="form-control" type="text" name="description" value="{{ old('description') }}">
     </div>

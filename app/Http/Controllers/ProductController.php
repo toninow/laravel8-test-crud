@@ -52,25 +52,16 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-        if ($request->status == 'available' && $request->stock == 0)
-        {
-            session()->flash('error', 'Si esta disponible debe tener stock');
-            return redirect()
-                ->back()
-                ->withInput($request->all())
-                ->withErrors('Si esta disponible debe tener stock');
-        }
-
-        $product->update($request->all());
+        $product->update($request->validated());
         return redirect()->route('products.index')
-        ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido editado");
+            ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido editado");
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
         return redirect()
-        ->route('products.index')
-        ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido eliminado");
+            ->route('products.index')
+            ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido eliminado");
     }
 }

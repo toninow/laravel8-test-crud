@@ -16,9 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $products = Product::factory(20)->create();
-        //Crea la carpeta products para almacenar las imagenes
-        Storage::makeDirectory('products');
+        $products = Product::factory(21)->create();
         // \App\Models\User::factory(10)->create();
     }
 }

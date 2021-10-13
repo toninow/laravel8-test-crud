@@ -9,6 +9,11 @@
         <input class="form-control" type="text" name="title" value={{ old('title') ?? $product->title }}>
     </div>
     <div class="form-row">
+        <label for="">Imagen</label>
+        <input type="file" name="{{ old('image') ?? $product->image }}" class="form-control">
+        <img src="/image/{{ $product->image }}" width="300px">
+    </div>
+    <div class="form-row">
         <label for="">Descripcion</label>
         <input class="form-control" type="text" name="description" value={{ old('description') ?? $product->description }} >
     </div>
