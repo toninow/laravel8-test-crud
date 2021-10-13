@@ -28,7 +28,7 @@
             <option {{ old('status') == 'unavailable' ? 'selected' : ($product->status == 'unavailable' ? 'selected' : '') }} value="unavailable">No Disponible</option>
         </select>
     </div>
-    <div class="form-row">
+    <div class="form-row mt-3">
         <button type="submit" class="btn btn-primary btn-lg">EDITAR PRODUCTO</button>
     </div>
 </form>
