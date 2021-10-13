@@ -29,14 +29,6 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        if ($request->status == 'available' && $request->stock == 0)
-        {
-            return redirect()
-                ->back()
-                ->withInput($request->all())
-                ->withErrors('Si esta disponible debe tener stock');
-        }
-
         $product = Product::Create($request->validated());
 
         return redirect()
