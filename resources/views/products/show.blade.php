@@ -7,6 +7,9 @@
     <title>LISTA DE PRODUCTOS</title>
 </head>
 <body>
+
+
+
     <h1>jabon (1)</h1>
     <div class="table-responsibe">
         <table class="table table-striped">

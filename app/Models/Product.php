@@ -17,9 +17,4 @@ class Product extends Model
         'stock',
         'status',
     ];
-
-    //relacion uno a muchos polimorfica
-    public function images(){
-        return $this->morphMany(Image::class, "imageable");
-    }
 }

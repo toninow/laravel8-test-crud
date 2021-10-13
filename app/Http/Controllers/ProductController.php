@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = DB::table('products')->get();
-        dd($products);
 
-        return view ('products.index');
+        return view('products.index')->with([
+            'products' => Product::all(),
+        ]);
+
     }
 
     public function store()
@@ -22,11 +24,10 @@ class ProductController extends Controller
 
     public function show($product)
     {
-
-        $product = DB::table('products')->where('id', $product)->first();
-        dd($product);
-
-        return view ('products.show');
+        $product = Product::findOrFail($product);
+        return view('products.show')->with([
+            'product' => $product,
+        ]);
     }
 
     public function edit($product)
