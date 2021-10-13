@@ -39,12 +39,16 @@ class ProductController extends Controller
 
     public function edit($product)
     {
-        return "EDITANDO PRODUCTO CON ID {$product}";
+        return view('products.edit')->with([
+            'product' => Product::findOrFail($product),
+        ]);
     }
 
     public function update($product)
     {
-        //
+        $product = Product::findOrFail($product);
+        $product->update(request()->all());
+        return $product;
     }
 
     public function destroy($product)

@@ -1,4 +1,4 @@
 @extends('layouts.master')
-@section
+@section('content')
 <h1>BIENVENIDO CAMARADA</h1>
 @endsection
