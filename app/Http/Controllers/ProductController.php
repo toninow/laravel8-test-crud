@@ -24,8 +24,23 @@ class ProductController extends Controller
 
     public function store()
     {
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in: Disponible, No Disponible'],
+        ];
+
+        request()->validate($rules);
+
+        if (request()-> status == 'Disponible' && request()->stock == 0){
+            session()->flash('error', 'Si esta disponible debe tener stock');
+            return redirect()->back();
+        }
+
         $product = Product::Create(request()->all());
-        return redirect();
+        return redirect()->route('products.index');
     }
 
     public function show($product)
@@ -45,15 +60,30 @@ class ProductController extends Controller
 
     public function update($product)
     {
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in: Disponible, No Disponible'],
+        ];
+
+        request()->validate($rules);
+
+        if (request()-> status == 'Disponible' && request()->stock == 0){
+            session()->flash('error', 'Si esta disponible debe tener stock');
+            return redirect()->back();
+        }
+
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return $product;
+        return redirect()->route('products.index');
     }
 
     public function destroy($product)
     {
         $product = Product::findOrFail($product);
         $product->delete();
-        return $product;
+        return redirect()->route('products.index');
     }
 }

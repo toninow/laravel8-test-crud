@@ -5,24 +5,24 @@
     @csrf
     <div class="form-row">
         <label for="">Titulo</label>
-        <input class="form-control" type="text" name="title" required>
+        <input class="form-control" type="text" name="title">
     </div>
     <div class="form-row">
         <label for="">Descripcion</label>
-        <input class="form-control" type="text" name="description" required>
+        <input class="form-control" type="text" name="description">
     </div>
     <div class="form-row">
         <label for="">Precio</label>
-        <input class="form-control" type="number" min="1.00" step="0.01" name="price" required>
+        <input class="form-control" type="number" min="1.00" step="0.01" name="price">
     </div>
 
     <div class="form-row">
         <label for="">Stock</label>
-        <input class="form-control" type="number" min="0" name="stock" required>
+        <input class="form-control" type="number" min="0" name="stock">
     </div>
     <div class="form-row">
         <label for="">Estado</label>
-        <select class="custom-select" name="status" required>
+        <select class="custom-select" name="status">
             <option value="">Por favor seleccione</option>
             <option value="Disponible"> Disponible</option>
             <option value="No Disponible">No Disponible</option>
