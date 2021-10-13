@@ -1,9 +1,12 @@
 @extends('layouts.master')
 @section('content')
     <h1>Lista de Productos</h1>
+
+    <a class="btn btn-success" href="{{ route('products.create') }}">CREAR PRODUCTO</a>
+
     @empty ($products)
     <div class="aler alert-warning">
-        Lista de Productos Vacia
+        LISTA DE PRODUCTOS VACIA
     </div>
     @else
     <div class="table-responsibe">
@@ -16,6 +19,7 @@
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +31,10 @@
                     <td>{{ $product ->price }}</td>
                     <td>{{ $product ->stock }}</td>
                     <td>{{ $product ->status }}</td>
+                    <td>
+                        <a class="btn btn-link" href="{{ route('products.show', ['product' => $product->id]) }}">mostrar</a>
+                        <a class="btn btn-link" href="{{ route('products.edit', ['product' => $product->id]) }}">editar</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

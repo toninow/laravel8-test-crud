@@ -1,11 +1,14 @@
 @extends('layouts.master')
-@section
-    <h1>jabon (1)</h1>
+@section('content')
+    <h1>{{ $product ->title }} ({{ $product ->id }})</h1>
     <div class="table-responsibe">
         <table class="table table-striped">
             <tbody>
                 <tr>
-                    <td>EL MEJOR JABON DE TODOS</td>
+                    <td>{{ $product ->description }}</td>
+                    <td>{{ $product ->price }}</td>
+                    <td>{{ $product ->stock }}</td>
+                    <td>{{ $product ->status }}</td>
                 </tr>
             </tbody>
         </table>
