@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('products', 'ProductController@index')->name('products.index');
 
-Route::post('products', 'ProductController@create')->name('products.create');
+Route::get('products/create', 'ProductController@create')->name('products.create');
 
 Route::post('products', 'ProductController@store')->name('products.store');
 

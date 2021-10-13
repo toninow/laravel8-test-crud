@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section
+@section('content')
     <h1>Lista de Productos</h1>
     @empty ($products)
     <div class="aler alert-warning">
@@ -12,7 +12,6 @@
                 <tr>
                     <th>Id</th>
                     <th>Titulo</th>
-                    <th>imagen</th>
                     <th>Descripcion</th>
                     <th>Precio</th>
                     <th>Stock</th>
@@ -24,9 +23,6 @@
                 <tr>
                     <td>{{ $product ->id }}</td>
                     <td>{{ $product ->title }}</td>
-                    <td><img src="{{ asset('/storage/products/' .$product ->image ) }}"
-                        class="rounded mx-auto d-block" style=" width: 150px; height: 100px;">
-                    </td>
                     <td>{{ $product ->description }}</td>
                     <td>{{ $product ->price }}</td>
                     <td>{{ $product ->stock }}</td>
