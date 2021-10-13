@@ -49,25 +49,24 @@ class ProductController extends Controller
         $product = Product::Create(request()->all());
         return redirect()
             ->route('products.index')
-            ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->id} ha sido creado");
+            ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido creado");
     }
 
-    public function show($product)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($product);
         return view('products.show')->with([
             'product' => $product,
         ]);
     }
 
-    public function edit($product)
+    public function edit(Product $product)
     {
         return view('products.edit')->with([
-            'product' => Product::findOrFail($product),
+            'product' => $product,
         ]);
     }
 
-    public function update($product)
+    public function update(Product $product)
     {
         $rules = [
             'title' => ['required', 'max:255'],
@@ -84,20 +83,20 @@ class ProductController extends Controller
             session()->flash('error', 'Si esta disponible debe tener stock');
             return redirect()
                 ->back()
-                ->withInput(request()->all());
+                ->withInput(request()->all())
+                ->withErrors('Si esta disponible debe tener stock');
         }
 
-        $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')
+        ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido editado");
     }
 
-    public function destroy($product)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($product);
         $product->delete();
         return redirect()
         ->route('products.index')
-        ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->id} ha sido eliminado");;
+        ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->title} ha sido eliminado");
     }
 }
