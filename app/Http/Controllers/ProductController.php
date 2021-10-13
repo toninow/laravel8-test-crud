@@ -36,14 +36,16 @@ class ProductController extends Controller
 
         if (request()->status == 'available' && request()->stock == 0)
         {
-            session()->flash('error', 'Si esta disponible debe tener stock');
             return redirect()
                 ->back()
-                ->withInput(request()->all());
+                ->withInput(request()->all())
+                ->withErrors('Si esta disponible debe tener stock');
         }
 
         $product = Product::Create(request()->all());
-        return redirect()->route('products.index');
+        return redirect()
+            ->route('products.index')
+            ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->id} ha sido creado");
     }
 
     public function show($product)
@@ -90,6 +92,8 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($product);
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()
+        ->route('products.index')
+        ->withSuccess("El nuevo producto con id {$product->id} y Titulo {$product->id} ha sido eliminado");;
     }
 }
