@@ -29,14 +29,17 @@ class ProductController extends Controller
             'description' => ['required', 'max:1000'],
             'price' => ['required', 'min:1'],
             'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in: Disponible, No Disponible'],
+            'status' => ['required', 'in:available,unavailable'],
         ];
 
         request()->validate($rules);
 
-        if (request()-> status == 'Disponible' && request()->stock == 0){
+        if (request()->status == 'available' && request()->stock == 0)
+        {
             session()->flash('error', 'Si esta disponible debe tener stock');
-            return redirect()->back();
+            return redirect()
+                ->back()
+                ->withInput(request()->all());
         }
 
         $product = Product::Create(request()->all());
@@ -65,14 +68,17 @@ class ProductController extends Controller
             'description' => ['required', 'max:1000'],
             'price' => ['required', 'min:1'],
             'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in: Disponible, No Disponible'],
+            'status' => ['required', 'in:available,unavailable'],
         ];
 
         request()->validate($rules);
 
-        if (request()-> status == 'Disponible' && request()->stock == 0){
+        if (request()->status == 'available' && request()->stock == 0)
+        {
             session()->flash('error', 'Si esta disponible debe tener stock');
-            return redirect()->back();
+            return redirect()
+                ->back()
+                ->withInput(request()->all());
         }
 
         $product = Product::findOrFail($product);

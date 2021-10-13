@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('description', 1000);
             $table->float('price')->unsigned();
             $table->integer('stock')->unsigned();
-            $table->string('status')->default('No disponible');
+            $table->string('status')->default('unavailable');
             $table->timestamps();
         });
     }

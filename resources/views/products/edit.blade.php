@@ -6,26 +6,26 @@
     @method('PUT')
     <div class="form-row">
         <label for="">Titulo</label>
-        <input class="form-control" type="text" name="title" value={{ $product->title }} required>
+        <input class="form-control" type="text" name="title" value={{ old('title') ?? $product->title }}>
     </div>
     <div class="form-row">
         <label for="">Descripcion</label>
-        <input class="form-control" type="text" name="description" value={{ $product->description }} required>
+        <input class="form-control" type="text" name="description" value={{ old('description') ?? $product->description }} >
     </div>
     <div class="form-row">
         <label for="">Precio</label>
-        <input class="form-control" type="number" min="1.00" step="0.01" name="price" value={{ $product->price }} required>
+        <input class="form-control" type="number" min="1.00" step="0.01" name="price" value={{old('price') ?? $product->price }}>
     </div>
 
     <div class="form-row">
         <label for="">Stock</label>
-        <input class="form-control" type="number" min="0" name="stock" value={{ $product->stock }} required>
+        <input class="form-control" type="number" min="0" name="stock" value={{ old('stock') ?? $product->stock }}>
     </div>
     <div class="form-row">
         <label for="">Estado</label>
-        <select class="custom-select" name="status" required>
-            <option {{ $product->status == 'Disponible' ? 'selected' : '' }} value="Disponible"> Disponible</option>
-            <option {{ $product->status == 'No Disponible' ? 'selected' : '' }} value="No Disponible">No Disponible</option>
+        <select class="custom-select" name="status">
+            <option {{ old('status') == 'available' ? 'selected' : ($product->status == 'available' ? 'selected' : '') }} value="available"> Disponible</option>
+            <option {{ old('status') == 'unavailable' ? 'selected' : ($product->status == 'unavailable' ? 'selected' : '') }} value="unavailable">No Disponible</option>
         </select>
     </div>
     <div class="form-row">
